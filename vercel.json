@@ -1,0 +1,11 @@
+{
+  "buildCommand": "cd ankle-pt-tracker && npm install && npm run build",
+  "outputDirectory": "ankle-pt-tracker/dist",
+  "installCommand": "cd ankle-pt-tracker && npm install",
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
+}
