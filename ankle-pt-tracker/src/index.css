@@ -2,6 +2,213 @@
 
 @layer base {
   :root {
-    --radius: 0.5rem;
+    --radius: 0px;
+  }
+
+  * {
+    image-rendering: pixelated;
+  }
+
+  body {
+    font-family: 'Press Start 2P', cursive;
+    background-color: #1a1a2e;
+    color: #7dd3fc;
+  }
+
+  /* Pixel-perfect scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #1a1a2e;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #3d4a6b;
+    border: 2px solid #1a1a2e;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #7dd3fc;
+  }
+}
+
+@layer components {
+  /* Retro card/panel styling */
+  .retro-panel {
+    background-color: #1a1a2e;
+    border: 3px solid #7dd3fc;
+    padding: 1.5rem;
+    position: relative;
+  }
+
+  /* Corner accents like in reference */
+  .retro-panel::before {
+    content: '';
+    position: absolute;
+    top: -3px;
+    left: -3px;
+    width: 12px;
+    height: 12px;
+    border-top: 3px solid #e879f9;
+    border-left: 3px solid #e879f9;
+  }
+
+  .retro-panel::after {
+    content: '';
+    position: absolute;
+    bottom: -3px;
+    right: -3px;
+    width: 12px;
+    height: 12px;
+    border-bottom: 3px solid #e879f9;
+    border-right: 3px solid #e879f9;
+  }
+
+  /* Retro button styling */
+  .retro-btn {
+    font-family: 'Press Start 2P', cursive;
+    background-color: transparent;
+    border: 2px solid #7dd3fc;
+    color: #7dd3fc;
+    padding: 0.75rem 1.5rem;
+    cursor: pointer;
+    transition: all 0.1s;
+    text-transform: uppercase;
+    font-size: 0.625rem;
+  }
+
+  .retro-btn:hover {
+    background-color: #7dd3fc;
+    color: #1a1a2e;
+    box-shadow: 0 0 10px rgba(125, 211, 252, 0.5);
+  }
+
+  .retro-btn:active {
+    transform: translate(2px, 2px);
+  }
+
+  .retro-btn-danger {
+    border-color: #f87171;
+    color: #f87171;
+  }
+
+  .retro-btn-danger:hover {
+    background-color: #f87171;
+    color: #1a1a2e;
+    box-shadow: 0 0 10px rgba(248, 113, 113, 0.5);
+  }
+
+  .retro-btn-success {
+    border-color: #4ade80;
+    color: #4ade80;
+  }
+
+  .retro-btn-success:hover {
+    background-color: #4ade80;
+    color: #1a1a2e;
+    box-shadow: 0 0 10px rgba(74, 222, 128, 0.5);
+  }
+
+  /* Progress bar styling like reference */
+  .retro-progress-track {
+    background-color: #3d4a6b;
+    height: 20px;
+    width: 100%;
+    position: relative;
+  }
+
+  .retro-progress-fill {
+    background-color: #7dd3fc;
+    height: 100%;
+    transition: width 0.3s ease-out;
+  }
+
+  /* Star icon for decorations */
+  .retro-star {
+    color: #3d4a6b;
+    font-size: 0.75rem;
+  }
+
+  .retro-star.active {
+    color: #7dd3fc;
+  }
+
+  /* Input/textarea styling */
+  .retro-input {
+    font-family: 'Press Start 2P', cursive;
+    background-color: #0f0f1a;
+    border: 2px solid #3d4a6b;
+    color: #7dd3fc;
+    padding: 0.75rem;
+    font-size: 0.5rem;
+    line-height: 1.5;
+    width: 100%;
+  }
+
+  .retro-input:focus {
+    outline: none;
+    border-color: #7dd3fc;
+    box-shadow: 0 0 10px rgba(125, 211, 252, 0.3);
+  }
+
+  .retro-input::placeholder {
+    color: #64748b;
+  }
+
+  /* Checkbox styling */
+  .retro-checkbox {
+    width: 16px;
+    height: 16px;
+    border: 2px solid #3d4a6b;
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+
+  .retro-checkbox.checked {
+    border-color: #4ade80;
+    background-color: #4ade80;
+  }
+
+  .retro-checkbox.checked::after {
+    content: '';
+    width: 6px;
+    height: 6px;
+    background-color: #1a1a2e;
+  }
+
+  /* Scanline effect overlay (optional) */
+  .scanlines::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 0.1) 0px,
+      rgba(0, 0, 0, 0.1) 1px,
+      transparent 1px,
+      transparent 2px
+    );
+    pointer-events: none;
+    z-index: 9999;
+  }
+}
+
+@layer utilities {
+  .text-shadow-glow {
+    text-shadow: 0 0 10px currentColor;
+  }
+
+  .font-pixel {
+    font-family: 'Press Start 2P', cursive;
   }
 }
