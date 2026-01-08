@@ -17,10 +17,16 @@ function App() {
 
   if (!isInitialized) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-emerald-500 mx-auto"></div>
-          <p className="mt-4 text-gray-600">Loading...</p>
+      <div className="min-h-screen bg-retro-dark flex items-center justify-center">
+        <div className="text-center space-y-4">
+          <div className="text-retro-primary text-lg animate-pulse">
+            LOADING...
+          </div>
+          <div className="flex justify-center gap-1">
+            <span className="w-2 h-2 bg-retro-primary animate-blink" style={{ animationDelay: '0s' }}></span>
+            <span className="w-2 h-2 bg-retro-primary animate-blink" style={{ animationDelay: '0.2s' }}></span>
+            <span className="w-2 h-2 bg-retro-primary animate-blink" style={{ animationDelay: '0.4s' }}></span>
+          </div>
         </div>
       </div>
     );
@@ -28,8 +34,15 @@ function App() {
 
   return (
     <Router>
-      <div className="min-h-screen bg-gray-50">
-        <div className="container mx-auto px-4 py-8">
+      <div className="min-h-screen bg-retro-dark relative overflow-hidden">
+        {/* Decorative corner accents like in the reference */}
+        <div className="fixed top-0 left-0 w-20 h-20 border-t-2 border-l-2 border-retro-accent opacity-50 pointer-events-none" />
+        <div className="fixed top-0 right-0 w-20 h-20 border-t-2 border-r-2 border-retro-accent opacity-50 pointer-events-none" />
+        <div className="fixed bottom-0 left-0 w-20 h-20 border-b-2 border-l-2 border-retro-accent opacity-50 pointer-events-none" />
+        <div className="fixed bottom-0 right-0 w-20 h-20 border-b-2 border-r-2 border-retro-accent opacity-50 pointer-events-none" />
+
+        {/* Main content */}
+        <div className="container mx-auto px-4 py-8 relative z-10">
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/reflections" element={<WeeklyReflections />} />

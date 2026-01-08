@@ -32,54 +32,66 @@ function Counter() {
 
   return (
     <div className="w-full">
-      <div className="bg-gradient-to-br from-emerald-50 to-teal-50 border border-emerald-200 rounded-xl p-8 shadow-sm">
-        <div className="text-center space-y-4">
-          <h2 className="text-sm font-semibold text-emerald-700 uppercase tracking-wider">
+      {/* Main Counter Display */}
+      <div className="retro-panel">
+        <div className="text-center space-y-6">
+          <h2 className="text-[0.5rem] sm:text-xs text-retro-primary uppercase tracking-wider">
             Days Since Last Ankle Roll
           </h2>
-          <div className="text-8xl font-bold text-emerald-600 tabular-nums">
-            {days}
+
+          {/* Big Number Display */}
+          <div className="py-4">
+            <span className="text-6xl sm:text-8xl text-retro-primary text-shadow-glow tabular-nums">
+              {isLoading ? '--' : days}
+            </span>
           </div>
-          {days > 0 && (
-            <p className="text-emerald-600 text-sm">
-              {days === 1 ? '1 day strong!' : `${days} days strong!`} Keep it up! 💪
-            </p>
+
+          {/* Status Message */}
+          {days > 0 && !isLoading && (
+            <div className="flex items-center justify-center gap-2">
+              <span className="text-retro-secondary">*</span>
+              <p className="text-[0.5rem] text-retro-success">
+                {days === 1 ? '1 day strong!' : `${days} days strong!`}
+              </p>
+              <span className="text-retro-secondary">*</span>
+            </div>
           )}
         </div>
       </div>
 
-      <div className="mt-4 text-center">
+      {/* Reset Button */}
+      <div className="mt-6 text-center space-y-3">
         <button
           onClick={handleReset}
-          className="px-6 py-3 bg-red-500 hover:bg-red-600 text-white font-medium rounded-lg shadow-sm transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2"
+          className="retro-btn retro-btn-danger"
         >
           Reset Counter
         </button>
-        <p className="text-xs text-gray-500 mt-2">
-          (Hope you don't need this! 🤞)
+        <p className="text-[0.4rem] text-retro-muted">
+          (Hope you don't need this!)
         </p>
       </div>
 
       {/* Confirmation Dialog */}
       {showConfirm && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-xl shadow-xl max-w-md w-full p-6">
-            <h3 className="text-lg font-semibold text-gray-900 mb-2">
-              Reset Counter?
+        <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4">
+          <div className="retro-panel max-w-md w-full">
+            <h3 className="text-xs text-retro-danger mb-4 text-center">
+              ! WARNING !
             </h3>
-            <p className="text-gray-600 mb-6">
+            <p className="text-[0.5rem] text-retro-primary mb-6 text-center leading-relaxed">
               Did you roll your ankle? This will reset the counter to 0.
             </p>
-            <div className="flex gap-3">
+            <div className="flex gap-4 justify-center">
               <button
                 onClick={cancelReset}
-                className="flex-1 px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium rounded-lg transition-colors duration-200"
+                className="retro-btn"
               >
                 Cancel
               </button>
               <button
                 onClick={confirmReset}
-                className="flex-1 px-4 py-2 bg-red-500 hover:bg-red-600 text-white font-medium rounded-lg transition-colors duration-200"
+                className="retro-btn retro-btn-danger"
               >
                 Yes, Reset
               </button>

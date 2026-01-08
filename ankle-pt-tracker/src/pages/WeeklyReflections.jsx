@@ -66,123 +66,129 @@ function WeeklyReflections() {
   };
 
   return (
-    <div className="w-full max-w-4xl mx-auto space-y-6">
+    <div className="w-full max-w-4xl mx-auto space-y-8">
       {/* Header */}
-      <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-3xl font-bold text-gray-900">Weekly Reflections</h1>
-          <p className="text-gray-600 mt-1">Track your progress and insights over time</p>
+      <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div className="text-center sm:text-left">
+          <h1 className="text-sm sm:text-lg text-retro-primary text-shadow-glow uppercase">
+            Weekly Reflections
+          </h1>
+          <p className="text-[0.4rem] text-retro-muted mt-2">
+            Track your progress over time
+          </p>
         </div>
         <Link
           to="/"
-          className="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors duration-200"
+          className="retro-btn"
         >
-          ← Back to Home
+          {'<'} Back
         </Link>
       </div>
 
       {/* Add New Reflection Button */}
-      <div className="bg-white border border-gray-200 rounded-xl p-6 shadow-sm">
+      <div className="retro-panel">
         <button
           onClick={() => setShowForm(!showForm)}
-          className="w-full px-6 py-3 bg-emerald-500 hover:bg-emerald-600 text-white font-medium rounded-lg transition-colors duration-200"
+          className={`retro-btn w-full ${showForm ? 'retro-btn-danger' : 'retro-btn-success'}`}
         >
-          {showForm ? 'Cancel' : '+ Add Weekly Reflection'}
+          {showForm ? 'Cancel' : '+ New Reflection'}
         </button>
       </div>
 
       {/* Reflection Form */}
       {showForm && (
-        <div className="bg-white border border-gray-200 rounded-xl p-6 shadow-sm">
-          <h2 className="text-xl font-bold text-gray-900 mb-6">New Weekly Reflection</h2>
+        <div className="retro-panel">
+          <h2 className="text-[0.6rem] text-retro-primary uppercase mb-6 text-center">
+            New Weekly Reflection
+          </h2>
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                How did your ankle feel this week?
+              <label className="block text-[0.45rem] text-retro-primary mb-2">
+                {'>'} How did your ankle feel this week?
               </label>
               <textarea
                 name="howDidAnkleFeel"
                 value={formData.howDidAnkleFeel}
                 onChange={handleChange}
                 rows={3}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent resize-none"
-                placeholder="Describe how your ankle felt during exercises and daily activities..."
+                className="retro-input resize-none"
+                placeholder="Describe how your ankle felt..."
               />
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Which exercises were easiest?
+              <label className="block text-[0.45rem] text-retro-primary mb-2">
+                {'>'} Which exercises were easiest?
               </label>
               <textarea
                 name="easiestExercises"
                 value={formData.easiestExercises}
                 onChange={handleChange}
                 rows={2}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent resize-none"
+                className="retro-input resize-none"
                 placeholder="List exercises that felt comfortable..."
               />
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Which exercises were hardest?
+              <label className="block text-[0.45rem] text-retro-primary mb-2">
+                {'>'} Which exercises were hardest?
               </label>
               <textarea
                 name="hardestExercises"
                 value={formData.hardestExercises}
                 onChange={handleChange}
                 rows={2}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent resize-none"
+                className="retro-input resize-none"
                 placeholder="List exercises that were challenging..."
               />
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Any pain or discomfort to note?
+              <label className="block text-[0.45rem] text-retro-primary mb-2">
+                {'>'} Any pain or discomfort to note?
               </label>
               <textarea
                 name="painOrDiscomfort"
                 value={formData.painOrDiscomfort}
                 onChange={handleChange}
                 rows={2}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent resize-none"
-                placeholder="Describe any pain, discomfort, or concerns..."
+                className="retro-input resize-none"
+                placeholder="Describe any pain or concerns..."
               />
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Overall progress assessment
+              <label className="block text-[0.45rem] text-retro-primary mb-2">
+                {'>'} Overall progress assessment
               </label>
               <textarea
                 name="overallProgress"
                 value={formData.overallProgress}
                 onChange={handleChange}
                 rows={2}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent resize-none"
-                placeholder="How do you feel about your overall progress this week?"
+                className="retro-input resize-none"
+                placeholder="How do you feel about your progress?"
               />
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Additional notes
+              <label className="block text-[0.45rem] text-retro-primary mb-2">
+                {'>'} Additional notes
               </label>
               <textarea
                 name="additionalNotes"
                 value={formData.additionalNotes}
                 onChange={handleChange}
                 rows={3}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent resize-none"
-                placeholder="Any other thoughts or observations..."
+                className="retro-input resize-none"
+                placeholder="Any other thoughts..."
               />
             </div>
 
             <button
               type="submit"
-              className="w-full px-6 py-3 bg-emerald-500 hover:bg-emerald-600 text-white font-medium rounded-lg transition-colors duration-200"
+              className="retro-btn retro-btn-success w-full"
             >
               Save Reflection
             </button>
@@ -192,11 +198,18 @@ function WeeklyReflections() {
 
       {/* Past Reflections */}
       <div className="space-y-4">
-        <h2 className="text-xl font-bold text-gray-900">Past Reflections</h2>
+        <h2 className="text-[0.6rem] text-retro-primary uppercase">
+          * Past Reflections *
+        </h2>
 
-        {reflections.length === 0 && !showForm && (
-          <div className="bg-white border border-gray-200 rounded-xl p-12 shadow-sm text-center">
-            <p className="text-gray-500">No reflections yet. Start by adding your first weekly reflection!</p>
+        {reflections.length === 0 && !showForm && !isLoading && (
+          <div className="retro-panel text-center py-8">
+            <p className="text-[0.5rem] text-retro-muted">
+              No reflections yet.
+            </p>
+            <p className="text-[0.45rem] text-retro-primary mt-4">
+              Start by adding your first weekly reflection!
+            </p>
           </div>
         )}
 
@@ -205,57 +218,55 @@ function WeeklyReflections() {
           .map((reflection, index) => (
             <div
               key={index}
-              className="bg-white border border-gray-200 rounded-xl p-6 shadow-sm space-y-4"
+              className="retro-panel space-y-4"
             >
-              <div className="flex items-start justify-between">
-                <div>
-                  <h3 className="text-lg font-bold text-gray-900">
-                    Week {reflection.weekNumber}
-                  </h3>
-                  <p className="text-sm text-gray-500">{formatDate(reflection.date)}</p>
-                </div>
+              <div className="flex items-center justify-between border-b border-retro-secondary pb-3">
+                <h3 className="text-[0.55rem] text-retro-primary">
+                  Week {reflection.weekNumber}
+                </h3>
+                <p className="text-[0.4rem] text-retro-muted">{formatDate(reflection.date)}</p>
               </div>
 
               <div className="space-y-3">
                 {reflection.howDidAnkleFeel && (
                   <div>
-                    <p className="text-sm font-medium text-gray-700">How did your ankle feel?</p>
-                    <p className="text-sm text-gray-600 mt-1">{reflection.howDidAnkleFeel}</p>
+                    <p className="text-[0.4rem] text-retro-accent">{'>'} How did your ankle feel?</p>
+                    <p className="text-[0.4rem] text-retro-primary/80 mt-1 leading-relaxed">{reflection.howDidAnkleFeel}</p>
                   </div>
                 )}
 
                 {reflection.easiestExercises && (
                   <div>
-                    <p className="text-sm font-medium text-gray-700">Easiest exercises</p>
-                    <p className="text-sm text-gray-600 mt-1">{reflection.easiestExercises}</p>
+                    <p className="text-[0.4rem] text-retro-accent">{'>'} Easiest exercises</p>
+                    <p className="text-[0.4rem] text-retro-primary/80 mt-1 leading-relaxed">{reflection.easiestExercises}</p>
                   </div>
                 )}
 
                 {reflection.hardestExercises && (
                   <div>
-                    <p className="text-sm font-medium text-gray-700">Hardest exercises</p>
-                    <p className="text-sm text-gray-600 mt-1">{reflection.hardestExercises}</p>
+                    <p className="text-[0.4rem] text-retro-accent">{'>'} Hardest exercises</p>
+                    <p className="text-[0.4rem] text-retro-primary/80 mt-1 leading-relaxed">{reflection.hardestExercises}</p>
                   </div>
                 )}
 
                 {reflection.painOrDiscomfort && (
                   <div>
-                    <p className="text-sm font-medium text-gray-700">Pain or discomfort</p>
-                    <p className="text-sm text-gray-600 mt-1">{reflection.painOrDiscomfort}</p>
+                    <p className="text-[0.4rem] text-retro-accent">{'>'} Pain or discomfort</p>
+                    <p className="text-[0.4rem] text-retro-primary/80 mt-1 leading-relaxed">{reflection.painOrDiscomfort}</p>
                   </div>
                 )}
 
                 {reflection.overallProgress && (
                   <div>
-                    <p className="text-sm font-medium text-gray-700">Overall progress</p>
-                    <p className="text-sm text-gray-600 mt-1">{reflection.overallProgress}</p>
+                    <p className="text-[0.4rem] text-retro-accent">{'>'} Overall progress</p>
+                    <p className="text-[0.4rem] text-retro-primary/80 mt-1 leading-relaxed">{reflection.overallProgress}</p>
                   </div>
                 )}
 
                 {reflection.additionalNotes && (
                   <div>
-                    <p className="text-sm font-medium text-gray-700">Additional notes</p>
-                    <p className="text-sm text-gray-600 mt-1">{reflection.additionalNotes}</p>
+                    <p className="text-[0.4rem] text-retro-accent">{'>'} Additional notes</p>
+                    <p className="text-[0.4rem] text-retro-primary/80 mt-1 leading-relaxed">{reflection.additionalNotes}</p>
                   </div>
                 )}
               </div>
