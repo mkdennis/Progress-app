@@ -1,22 +1,27 @@
 import { useState, useEffect } from 'react';
-import { getCounterDays, resetCounter, checkAndIncrementCounter } from '../utils/storage';
+import { getCounterDays, resetCounter, checkAndIncrementCounter } from '../utils/supabaseStorage';
 
 function Counter() {
   const [days, setDays] = useState(0);
   const [showConfirm, setShowConfirm] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Check and increment counter on load
-    checkAndIncrementCounter();
-    setDays(getCounterDays());
+    const loadCounter = async () => {
+      await checkAndIncrementCounter();
+      const counterDays = await getCounterDays();
+      setDays(counterDays);
+      setIsLoading(false);
+    };
+    loadCounter();
   }, []);
 
   const handleReset = () => {
     setShowConfirm(true);
   };
 
-  const confirmReset = () => {
-    resetCounter();
+  const confirmReset = async () => {
+    await resetCounter();
     setDays(0);
     setShowConfirm(false);
   };

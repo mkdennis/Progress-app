@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { getExercisesForDay, getAllExerciseIdsForDay } from '../data/exercises';
-import { toggleExercise, isExerciseCompleted, checkAndResetDailyExercises } from '../utils/storage';
+import { toggleExercise, getAllExerciseCompletionsForDay, checkAndResetDailyExercises } from '../utils/supabaseStorage';
 
 function ExerciseCard({ exercise, isCompleted, onToggle }) {
   return (
@@ -84,13 +84,17 @@ function DailyWorkout() {
   const [exercises, setExercises] = useState([]);
   const [completionState, setCompletionState] = useState({});
   const [currentDay, setCurrentDay] = useState('');
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    checkAndResetDailyExercises();
-    loadExercises();
+    const init = async () => {
+      await checkAndResetDailyExercises();
+      await loadExercises();
+    };
+    init();
   }, []);
 
-  const loadExercises = () => {
+  const loadExercises = async () => {
     const today = new Date();
     const dayOfWeek = today.getDay();
     const dayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
@@ -99,17 +103,14 @@ function DailyWorkout() {
     const todayExercises = getExercisesForDay(dayOfWeek);
     setExercises(todayExercises);
 
-    // Load completion state
-    const allExerciseIds = getAllExerciseIdsForDay(dayOfWeek);
-    const completion = {};
-    allExerciseIds.forEach(id => {
-      completion[id] = isExerciseCompleted(id);
-    });
+    // Load completion state from Supabase
+    const completion = await getAllExerciseCompletionsForDay();
     setCompletionState(completion);
+    setIsLoading(false);
   };
 
-  const handleToggle = (exerciseId) => {
-    const newState = toggleExercise(exerciseId);
+  const handleToggle = async (exerciseId) => {
+    const newState = await toggleExercise(exerciseId);
     setCompletionState(prev => ({
       ...prev,
       [exerciseId]: newState

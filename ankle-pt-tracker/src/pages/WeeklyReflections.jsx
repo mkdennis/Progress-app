@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react';
-import { getWeeklyReflections, addWeeklyReflection, getCurrentWeekNumber, getMondayOfCurrentWeek } from '../utils/storage';
+import { getWeeklyReflections, addWeeklyReflection, getCurrentWeekNumber, getMondayOfCurrentWeek } from '../utils/supabaseStorage';
 import { Link } from 'react-router-dom';
 
 function WeeklyReflections() {
   const [reflections, setReflections] = useState([]);
   const [showForm, setShowForm] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [formData, setFormData] = useState({
     howDidAnkleFeel: '',
     easiestExercises: '',
@@ -18,18 +19,19 @@ function WeeklyReflections() {
     loadReflections();
   }, []);
 
-  const loadReflections = () => {
-    const savedReflections = getWeeklyReflections();
+  const loadReflections = async () => {
+    const savedReflections = await getWeeklyReflections();
     setReflections(savedReflections);
+    setIsLoading(false);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     const monday = getMondayOfCurrentWeek();
     const weekNumber = getCurrentWeekNumber();
 
-    addWeeklyReflection({
+    await addWeeklyReflection({
       weekNumber,
       weekEnding: new Date().toISOString(),
       ...formData
@@ -45,7 +47,7 @@ function WeeklyReflections() {
       additionalNotes: ''
     });
     setShowForm(false);
-    loadReflections();
+    await loadReflections();
   };
 
   const handleChange = (e) => {
